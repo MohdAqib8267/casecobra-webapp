@@ -18,8 +18,8 @@ const LoginModal = ({
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }) => {
   return (
-    <Dialog onOpenChange={setIsOpen} open={isOpen}>
-      <DialogContent className='absolute z-[9999999]'>
+    <Dialog  onOpenChange={setIsOpen} open={isOpen}>
+      <DialogContent className='absolute justify-center items-center top-[65%] z-[9999999]'>
         <DialogHeader>
           <div className='relative mx-auto w-24 h-24 mb-2'>
             <Image

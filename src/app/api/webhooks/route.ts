@@ -4,9 +4,9 @@ import { headers } from 'next/headers'
 import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { Resend } from 'resend'
-import OrderReceivedEmail from '@/components/emails/OrderRecievedEmails'
+import OrderRecievedEmails from '@/components/emails/OrderRecievedEmails'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
+const resend = new Resend('re_hbkASPzo_DidKP2CQSi8XWQLK6fqijCk1')
 
 export async function POST(req: Request) {
   try {
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
       const billingAddress = session.customer_details!.address
       const shippingAddress = session.shipping_details!.address
 
-      console.log(billingAddress);
+      // console.log(billingAddress);
 
       const updatedOrder = await db.order.update({
         where: {
@@ -73,12 +73,12 @@ export async function POST(req: Request) {
           },
         },
       })
-
+      console.log(event.data.object.customer_details.email);
       await resend.emails.send({
-        from: 'CaseCobra <mohdaqib921@gmail.com>',
+        from: 'CaseCobra <mohdaqib@casecobra.com>',
         to: [event.data.object.customer_details.email],
         subject: 'Thanks for your order!',
-        react: OrderReceivedEmail({
+        react: OrderRecievedEmails({
           orderId,
           orderDate: updatedOrder.createdAt.toLocaleDateString(),
           // @ts-ignore
@@ -89,7 +89,7 @@ export async function POST(req: Request) {
             postalCode: shippingAddress!.postal_code!,
             street: shippingAddress!.line1!,
             state: shippingAddress!.state,
-          },
+          },  
         }),
       })
     }

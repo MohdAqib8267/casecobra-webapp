@@ -1,11 +1,12 @@
 
 import { ShippingAddress } from "@prisma/client";
 import { Html, Button, Head, Preview, Body, Container, Section, Img, Text, Heading, Row, Hr, Column } from "@react-email/components";
-const OrderReceivedEmail = ({ shippingAddress, orderId, orderDate }: { shippingAddress: ShippingAddress, orderId: string, orderDate: string }) => {
+const OrderRecievedEmails = ({ shippingAddress, orderId, orderDate }: { shippingAddress: ShippingAddress, orderId: string, orderDate: string }) => {
 
-    const baseUrl = process.env.NODE_ENV == 'development' ? 'http://localhost:3000' : 'https://casecobra-webapp.vercel.app'
+    const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://casecobra-webapp.vercel.app'
 
-    
+    console.log(shippingAddress, orderId, orderDate);
+
     return (
         <Html>
             <Head />
@@ -154,4 +155,4 @@ const OrderReceivedEmail = ({ shippingAddress, orderId, orderDate }: { shippingA
         </Html >
     )
 }
-export default OrderReceivedEmail
+export default OrderRecievedEmails
