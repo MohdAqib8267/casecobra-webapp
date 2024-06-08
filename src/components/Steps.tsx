@@ -56,6 +56,8 @@ const Steps=()=>{
     const path = usePathname();
     // console.log(path.split('/')[2]);
     const endPath = path.split('/')[2];
+
+     const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3000' : 'https://casecobra-webapp.vercel.app'
     return(
         <ol className="flex w-full my-4">
             {
@@ -68,7 +70,7 @@ const Steps=()=>{
                             </div>
                             <div className="w-full ml-1 items-center flex flex-col justify-between h-full">
                                 <div className={cn(' flex flex-col gap-2 lg:flex-row')}>
-                                    <img className="h-10 w-10" src={`/Snake-${index+1}.png`} alt="step images" />
+                                    <img className="h-10 w-10" src={`${baseUrl}/Snake-${index+1}.png`} alt="step images" />
                                     <div>
                                         <h5 className="text-gray-600 text-sm lg:text-normal font-bold">{val?.name}</h5>
                                         <p className="text-gray-600 text-xs lg:text-sm">{val?.description}</p>
